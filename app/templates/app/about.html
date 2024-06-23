@@ -1,0 +1,264 @@
+{% extends 'app/base.html' %}
+{% block about_title%} 
+{% block body %}
+
+  {% load static %}
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'app/assets/js/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'app/assets/js/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'app/assets/js/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'app/assets/css/style.css' %}" rel="stylesheet">
+
+
+
+    <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <!-- Slide 1 -->
+          <div class="carousel-item active">
+            <div class="carousel-background"><img src="{% static 'shop/assets/img/slide/slide-1.jpg' %}" alt=""></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown">Chào mừng bạn  <span>đến với văn phòng phẩm</span></h2>
+                <a href="{% url 'home'%}" class="btn-get-started animate__animated animate__fadeInUp scrollto">Bắt đầu</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="{% static 'shop/assets/img/slide/slide-2.jpg' %}" alt=""></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown mb-0">Nhiệm vụ của chúng ta</h2>
+                <p class="animate__animated animate__fadeInUp">Là số một</p>
+                <a href="{% url 'home'%}" class="btn-get-started animate__animated animate__fadeInUp scrollto">Bắt đầu</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="{% static 'shop/assets/img/slide/slide-3.jpg' %}" alt=""></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown mb-0">Nguyễn Xuân Phong</h2>
+
+
+                <a href="{% url 'home'%}" class="btn-get-started animate__animated animate__fadeInUp scrollto">Bắt đầu</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon icofont-thin-double-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon icofont-thin-double-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+   <main id="main">
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Giới thiệu</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h3>Chào mừng <strong>bạn đến với văn phòng phẩm của chúng tôi </strong></h3>
+            <p class="font-italic">
+              Sản phẩm văn phòng là những vật dụng và thiết bị cần thiết trong môi trường làm việc tại văn phòng, hỗ trợ hỗ trợ công việc hàng ngày và nâng cao hiệu quả công việc. Văn phòng sản phẩm bao gồm các sản phẩm như giấy, bút, bút chì, kẹp giấy, bìa hồ sơ, sổ tay, máy in, mực in, và nhiều loại thiết bị khác. Các sản phẩm này không chỉ đơn giản là công cụ hỗ trợ viết và lưu trữ thông tin mà còn góp phần tạo nên một không gian làm việc chuyên nghiệp, gọn gàng và tiện lợi.
+
+Sự đa dạng và phong phú của văn phòng sản phẩm cho phép nhân viên văn phòng lựa chọn những sản phẩm phù hợp nhất với nhu cầu công việc của mình. Dược phẩm, giấy và bút là những vật dụng cơ bản nhất, không thể thiếu trong mọi văn phòng, trong khi các sản phẩm như máy hủy tài liệu, bảng trắng và các loại phần mềm quản lý tài liệu giúp tối ưu hóa quy trình làm việc và bảo mật thông tin.
+            </p>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 content">
+            <div class="skills-content">
+              <p><b>Xếp hạng: </b></p>
+              <div class="progress">
+                <span class="skill">5 sao <i class="val">93%</i></span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+
+              <div class="progress">
+                <span class="skill">4 sao <i class="val">90%</i></span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+
+              <div class="progress">
+                <span class="skill">3 sao <i class="val">30%</i></span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+
+              <div class="progress">
+                <span class="skill">2 sao <i class="val">5%</i></span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+
+              <div class="progress">
+                <span class="skill">1 sao <i class="val">0%</i></span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Counts Section ======= -->
+    <section class="counts section-bg">
+      <div class="container">
+
+        <div class="row no-gutters">
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <i class="icofont-simple-smile"></i>
+              <span data-toggle="counter-up">111</span>
+              <p><strong>Khách hàng đánh giá tốt</strong></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <i class="icofont-document-folder"></i>
+              <span data-toggle="counter-up">222</span>
+              <p><strong>Sản phẩm</strong></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <i class="icofont-live-support"></i>
+              <span data-toggle="counter-up">333</span>
+              <p><strong>Giờ hỗ trợ</strong></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <i class="icofont-users-alt-5"></i>
+              <span data-toggle="counter-up">30</span>
+              <p><strong>Người làm việc chăm chỉ</strong></p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Counts Section -->
+
+    <!-- ======= Our Team Section ======= -->
+    <section id="team" class="team">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Nhóm của tôi</h2>
+        </div>
+
+        <div class="row" style="padding-left: 379px;">
+          <div class="col-xl-3 col-lg-2 col-md-2" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{% static 'app/assets/img/team/team-1.jpg' %}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Nguyen Xuan Phong</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-2 col-md-2" data-wow-delay="0.1s">
+            <div class="member">
+              <img src="{% static 'app/assets/img/team/team-1.jpg' %}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Truong Ba Dai</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-2 col-md-2" data-wow-delay="0.2s">
+            <div class="member">
+              <img src="{% static 'app/assets/img/team/team-3.jpg' %}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Khong Duy Thanh</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </section><!-- End Our Team Section -->
+   </main>
+
+{% endblock %}
+
+{% block js %}
+<script>
+
+$('#popcart').popover();
+updatePopover(cart);
+
+function updatePopover(cart) {
+    var popStr = "";
+    popStr = popStr + "<h5> Click <a href='/shop/checkout'><button class='btn btn-primary'>Here</button></a> to order </h5><div class='mx-2 my-2'>";
+    document.getElementById("popcart").setAttribute('data-content', popStr);
+    $('#popcart').popover();
+}
+
+</script>
+
+{% load static %}
+  <!-- Vendor JS Files -->
+  <script src="{% static 'app/assets/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'app/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'app/assets/vendor/jquery-sticky/jquery.sticky.js' %}"></script>
+  <script src="{% static 'app/assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'app/assets/vendor/counterup/counterup.min.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'app/assets/js/main.js' %}"></script>
+
+
+{% endblock %}
+{% endblock about_title%}

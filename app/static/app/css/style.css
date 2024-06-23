@@ -1,0 +1,22 @@
+/* kich cỡ mặc định của ảnh*/
+.uniform-size {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+}
+
+.cart-count {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: transform 0.3s;
+}
+
+.cart-count.animate {
+    transform: scale(1.5);
+}

@@ -35,18 +35,47 @@
 				<div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
 				<div style="flex:2"><p>{{item.product.name}}</p></div>
 				<div style="flex:1"><p>{{item.product.price}}</p></div>
-				<div style="flex:1">
-					<p class="quantity">{{item.quantity}}</p>
-					<div class="quantity">
-						<img class="chg-quantity" src="{% static  'app/images/banner/arrow-up.png' %}">
-				
-						<img class="chg-quantity" src="{% static  'app/images/banner/arrow-down.png' %}">
-					</div>
+				<div style="flex:1"><p class="quantity">{{item.quantity}}</p>
+					<form method="POST" action="{% url 'add_to_cart' %}" class="update-cart-form">
+						{% csrf_token %}
+						<div class="quantity">
+							<img data-product = {{item.product.id}} data-action = 'add' class="chg-quantity updata-cart" src="{% static  'app/images/banner/arrow-up.png' %}">
+							<img data-product = {{item.product.id}} data-action = 'remove' class="chg-quantity updata-cart" src="{% static  'app/images/banner/arrow-down.png' %}">
+						</div>
+					</form>
+					
 				</div>
-				<div style="flex:1"><p>{{order.cart_items }} đ</p></div>
+				<div style="flex:1"><p>{{item.get_total}} đ</p></div>
 			</div>
 			{%endfor%}	
 		</div>
 	</div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.chg-quantity').click(function(){
+            var productId = $(this).data('product');
+            var action = $(this).data('action');
+            var url = "{% url 'add_to_cart' %}";
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    'productId': productId,
+                    'action': action,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function(response){
+                    window.location.reload();
+                },
+                error: function(response){
+                    console.log("error", response);
+                }
+            });
+        });
+    });
+</script>
 {% endblock cart_content %}

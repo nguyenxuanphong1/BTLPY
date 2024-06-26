@@ -33,7 +33,7 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return str(self.transaction_id)
+        return str(self.id)
 
     @property
     def get_cart_items(self):
@@ -50,7 +50,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True, related_name='order_items')
     order = models.ForeignKey('Order', on_delete=models.SET_NULL, blank=True, null=True, related_name='order_items')
-    quantity = models.IntegerField(default=0)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -59,10 +59,9 @@ class OrderItem(models.Model):
 
     @property
     def get_total(self):
-        if self.product:
-            return self.product.price * self.quantity
-        return 0
-
+            total = self.product.price * self.quantity
+            return total
+    
 
 class ShippingAddress(models.Model):
     order = models.OneToOneField(Order, on_delete=models.SET_NULL, blank=True, null=True, related_name='shipping_address')
@@ -75,3 +74,4 @@ class ShippingAddress(models.Model):
     def __str__(self):
         parts = [self.address, self.city, self.state]
         return ', '.join(part for part in parts if part) if any(parts) else ''
+

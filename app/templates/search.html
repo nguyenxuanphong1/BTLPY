@@ -108,6 +108,43 @@
         </div>
     </nav>
 
+    <!-- Nội dung trang web -->
+    <h1 class="text-center"><br>TÌM KIẾM</h1>
+
+        {% if searched %}
+            {% if products %}
+                <ul>
+                    {% for product in products %}
+                    <div class="row" style="width:100%">
+                    <div class="col-lg-2    ">
+                        <div class="card">
+                            {% if product.image %}
+                                <img class="card-img-top uniform-size" src="{{ product.image.url }}" alt="Sản phẩm">
+                            {% else %}
+                                <img class="card-img-top uniform-size" src="{% static 'app/images/default_product.png' %}" alt="Sản phẩm mặc định">
+                            {% endif %}
+                            <div class="card-body text-center">
+                                <h5 class="card-title"><strong>{{ product.name }} <br>{{ product.price|floatformat:3 }} đ</strong></h5>
+                                <hr>
+                                <div class="btn-group">
+                                    <form method="POST" action="{% url 'add_to_cart' %}" class="update-cart-form">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="productId" value="{{ product.id }}">
+                                        <input type="hidden" name="action" value="add">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary add-btn" href="{% url 'home'%}">Thêm vào giỏ hàng</button>
+                                        <a href="#" class="btn btn-sm btn-outline-success">Xem</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center">Không tìm thấy sản phẩm.</p>
+            {% endif %}
+        {% endif %}
+    </div>
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -115,19 +152,5 @@
     <script src="{% static 'app/js/all.min.js' %}"></script>
     <script src="{% static 'app/js/myscrip.js' %}"></script>
     <script src="{% static 'app/js/s3.js' %}"></script>
-    
-    
-    <!--main body-->
-    {% block banner_slider%}{% endblock banner_slider%} 
-    {% block main-content%}{% endblock main-content%} 
-    {% block cart_content %}{% endblock cart_content%}
-    {% block about_title%}{% endblock about_title%}
-    {% block content_checkout %}{% endblock content_checkout%}
-    
-    <!--footer-->
-    <footer class="container-fluid bg-dark text-white text-center fixed-bottom p-2 mt-5">
-        Copyright 2024
-    </footer>
-    <script src="{% static 'app/js/cart.js' %}"></script>
 </body>
 </html>

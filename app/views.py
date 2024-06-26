@@ -2,9 +2,21 @@ from django.shortcuts import render, get_object_or_404, redirect  # Thêm 'redir
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 from .models import Product, Order, OrderItem
+from django.contrib.auth.decorators import login_required
 import json
 
-                            
+
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched', '')
+        products = Product.objects.filter(name__icontains=searched)  # Lọc sản phẩm có tên chứa từ khóa tìm kiếm
+        context = {
+            'searched': searched,
+            'products': products,
+        }
+        return render(request, 'search.html', context)
+    else:
+        return render(request, 'search.html', {})
 
 
 def home(request):
@@ -79,10 +91,15 @@ def add_to_cart(request):
                 order_item.save()
 
                 
-                return redirect('home')  
+                return redirect('cart')  
 
             except Product.DoesNotExist:
                 return JsonResponse({'error': 'Product not found'}, status=404)
 
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+def login(request):
+    context = {}
+    return render(request, 'app/login.html', context)
 

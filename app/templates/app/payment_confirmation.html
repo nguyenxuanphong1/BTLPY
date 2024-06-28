@@ -1,0 +1,62 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content_payment_confirmation %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2 class="text-center">Xác nhận Thanh toán</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success text-center" role="alert">
+                        <p>Cảm ơn bạn đã mua hàng! Đơn hàng của bạn đã được thanh toán thành công.</p>
+                    </div>
+                    
+                    <h3 class="mt-4">Thông tin khách hàng</h3>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Tên:</strong> {{ customer.name }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ customer.email }}</li>
+                    </ul>
+
+                    <h3>Thông tin đơn hàng</h3>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Mã đơn hàng:</strong> {{ order.id }}</li>
+                        <li class="list-group-item"><strong>Ngày đặt hàng:</strong> {{ order.date_order }}</li>
+                        <li class="list-group-item"><strong>Tổng số lượng:</strong> {{ order.get_cart_items }}</li>
+                        <li class="list-group-item"><strong>Tổng giá trị:</strong> {{ order.get_cart_total }} VND</li>
+                    </ul>
+
+                    <h3>Thông tin sản phẩm</h3>
+                    <div class="row">
+                        {% for item in items %}
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <img src="{{ item.product.ImageURL }}" class="card-img-top" alt="{{ item.product.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.product.name }}</h5>
+                                    <p class="card-text">Số lượng: {{ item.quantity }}</p>
+                                    <p class="card-text">Giá: {{ item.product.price }} VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <h3>Thông tin giao hàng</h3>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Địa chỉ:</strong> {{ order.shipping_address.address }}</li>
+                        <li class="list-group-item"><strong>Thành phố:</strong> {{ order.shipping_address.city }}</li>
+                        <li class="list-group-item"><strong>Tỉnh:</strong> {{ order.shipping_address.state }}</li>
+                        <li class="list-group-item"><strong>Số điện thoại:</strong> {{ order.shipping_address.mobile }}</li>
+                    </ul>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-primary btn-lg">Quay lại Trang chủ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

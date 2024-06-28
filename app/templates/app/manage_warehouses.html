@@ -1,0 +1,18 @@
+{% load static %}
+{% block title %}Manage Warehouses{% endblock %}
+
+{% block content %}
+  <h2>Manage Warehouses</h2>
+  <ul>
+    {% for warehouse in warehouses %}
+    <li>
+      <h3>{{ warehouse.name }}</h3>
+      <p>Location: {{ warehouse.location }}</p>
+      <p>Current Stock: {{ warehouse.current_stock }}</p>
+      <a href="{% url 'manage_stock' warehouse.id %}">Manage Stock</a>
+    </li>
+    {% empty %}
+    <li>No warehouses found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

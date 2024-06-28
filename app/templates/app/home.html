@@ -41,12 +41,12 @@
     </button>
 </div>
 {% endblock banner_slider %}
+
 {% block main-content %}
-<div><h2>Các loại bút bi và sách vở</h2></div>
-
+<div><h2>Danh sách sản phẩm</h2></div>
 <div class="row" style="width:100%">
     {% for product in products %}
-        <div class="col-lg-2    ">
+        <div class="col-lg-2">
             <div class="card">
                 {% if product.image %}
                     <img class="card-img-top uniform-size" src="{{ product.image.url }}" alt="Sản phẩm">
@@ -61,7 +61,7 @@
                             {% csrf_token %}
                             <input type="hidden" name="productId" value="{{ product.id }}">
                             <input type="hidden" name="action" value="add">
-                            <button type="submit" class="btn btn-sm btn-outline-secondary add-btn" href="{% url 'home'%}">Thêm vào giỏ hàng</button>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary add-btn">Thêm vào giỏ hàng</button>
                             <a href="#" class="btn btn-sm btn-outline-success">Xem</a>
                         </form>
                     </div>
@@ -70,63 +70,4 @@
         </div>
     {% endfor %}
 </div>
-
-<div><h2>Các loại kẹp ghim, kẹp bướm</h2></div>
-<div class="row" style="width:100%">
-    {% for product in products %}
-        <div class="col-lg-2    ">
-            <div class="card">
-                {% if product.image %}
-                    <img class="card-img-top uniform-size" src="{{ product.image.url }}" alt="Sản phẩm">
-                {% else %}
-                    <img class="card-img-top uniform-size" src="{% static 'app/images/default_product.png' %}" alt="Sản phẩm mặc định">
-                {% endif %}
-                <div class="card-body text-center">
-                    <h5 class="card-title"><strong>{{ product.name }} <br>{{ product.price|floatformat:3 }} đ</strong></h5>
-                    <hr>
-                    <div class="btn-group">
-                        <form method="POST" action="{% url 'add_to_cart' %}" class="update-cart-form">
-                            {% csrf_token %}
-                            <input type="hidden" name="productId" value="{{ product.id }}">
-                            <input type="hidden" name="action" value="add">
-                            <button type="submit" class="btn btn-sm btn-outline-secondary add-btn" href="{% url 'home'%}">Thêm vào giỏ hàng</button>
-                            <a href="#" class="btn btn-sm btn-outline-success">Xem</a>
-                        </form>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-</div>
-
-<div><h2>Các loại kẹp ghim, kẹp bướm</h2></div>
-<div class="row" style="width:100%">
-    {% for product in products %}
-        <div class="col-lg-2    ">
-            <div class="card">
-                {% if product.image %}
-                    <img class="card-img-top uniform-size" src="{{ product.image.url }}" alt="Sản phẩm">
-                {% else %}
-                    <img class="card-img-top uniform-size" src="{% static 'app/images/default_product.png' %}" alt="Sản phẩm mặc định">
-                {% endif %}
-                <div class="card-body text-center">
-                    <h5 class="card-title"><strong>{{ product.name }} <br>{{ product.price|floatformat:3 }} đ</strong></h5>
-                    <hr>
-                    <div class="btn-group">
-                        <form method="POST" action="{% url 'add_to_cart' %}" class="update-cart-form">
-                            {% csrf_token %}
-                            <input type="hidden" name="productId" value="{{ product.id }}">
-                            <input type="hidden" name="action" value="add">
-                            <button type="submit" class="btn btn-sm btn-outline-secondary add-btn" href="{% url 'home'%}">Thêm vào giỏ hàng</button>
-                            <a href="#" class="btn btn-sm btn-outline-success">Xem</a>
-                        </form>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-</div>
-
 {% endblock main-content %}

@@ -6,5 +6,12 @@ admin.site.register(Customer)
 admin.site.register(Product)
 admin.site.register(Order)
 admin.site.register(OrderItem)
+admin.site.register(Warehouse)
+admin.site.register(Stock)
+admin.site.register(Payment)
+admin.site.register(Shipment)
+admin.site.register(Revenue)
 admin.site.register(ShippingAddress)
+admin.site.register(OrderWarehouse)
+
 

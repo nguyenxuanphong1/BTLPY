@@ -34,7 +34,10 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return str(self.id)
+        customer_name = self.customer.name if self.customer else 'Unknown Customer'
+        customer_email = self.customer.email if self.customer else 'Unknown Email'
+        order_items = ', '.join([str(item) for item in self.order_items.all()])
+        return f"Order ID: {self.id} - Customer: {customer_name} ({customer_email}) - Items: {order_items}"
 
     @property
     def get_cart_items(self):
@@ -127,3 +130,5 @@ class Revenue(models.Model):
 
     def __str__(self):
         return f"Revenue on {self.date}"
+    
+

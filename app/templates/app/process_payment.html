@@ -21,7 +21,8 @@
             <label for="cvv">CVV</label>
             <input type="text" class="form-control" id="cvv" name="cvv" required>
         </div>
-        <button type="submit" class="btn btn-primary">Thanh toán</button>
+        <a href="{% url 'payment_confirmation' order.id %}" class="btn btn-primary btn-lg">Xác nhận Thanh toán</a>
+
     </form>
 </div>
 {% endblock %}

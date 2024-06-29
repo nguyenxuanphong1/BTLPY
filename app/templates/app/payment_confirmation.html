@@ -44,12 +44,16 @@
                     </div>
 
                     <h3>Thông tin giao hàng</h3>
+                    {% if shipping_address %}
                     <ul class="list-group mb-3">
-                        <li class="list-group-item"><strong>Địa chỉ:</strong> {{ order.shipping_address.address }}</li>
-                        <li class="list-group-item"><strong>Thành phố:</strong> {{ order.shipping_address.city }}</li>
-                        <li class="list-group-item"><strong>Tỉnh:</strong> {{ order.shipping_address.state }}</li>
-                        <li class="list-group-item"><strong>Số điện thoại:</strong> {{ order.shipping_address.mobile }}</li>
+                        <li class="list-group-item"><strong>Địa chỉ:</strong> {{ shipping_address.address }}</li>
+                        <li class="list-group-item"><strong>Thành phố:</strong> {{ shipping_address.city }}</li>
+                        <li class="list-group-item"><strong>Tỉnh:</strong> {{ shipping_address.state }}</li>
+                        <li class="list-group-item"><strong>Số điện thoại:</strong> {{ shipping_address.mobile }}</li>
                     </ul>
+                    {% else %}
+                    <div class="alert alert-warning">Không có thông tin giao hàng.</div>
+                    {% endif %}
 
                     <div class="text-center mt-4">
                         <a href="{% url 'home' %}" class="btn btn-primary btn-lg">Quay lại Trang chủ</a>

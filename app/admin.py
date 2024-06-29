@@ -14,4 +14,3 @@ admin.site.register(Revenue)
 admin.site.register(ShippingAddress)
 admin.site.register(OrderWarehouse)
 
-

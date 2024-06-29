@@ -28,6 +28,7 @@ def manage_warehouses(request):
 def manage_stock(request, warehouse_id):
     warehouse = get_object_or_404(Warehouse, id=warehouse_id)
     stocks = Stock.objects.filter(warehouse=warehouse)
+
     context = {
         'warehouse': warehouse,
         'stocks': stocks,
@@ -102,11 +103,9 @@ def checkout(request):
         order.complete = True
         order.save()
 
-        # Chuyển hướng đến trang hoàn tất thanh toán (hoặc bất kỳ trang nào bạn cần)
-        return redirect('order_complete')  # Điều hướng đến trang hoàn tất thanh toán
+        return redirect('order_complete')  
 
     else:
-        # Nếu không phải POST request, hiển thị trang thanh toán
         items = []
         order = None
         cart_items = 0
@@ -139,15 +138,13 @@ def add_to_cart(request):
         if product_id and action:
             try:
                 product = get_object_or_404(Product, id=product_id)
-                
-                # Tạo hoặc lấy đơn hàng hiện tại
+
                 if request.user.is_authenticated:
                     customer = request.user.customer
                     order, created = Order.objects.get_or_create(customer=customer, complete=False)
                 else:
                     order, created = Order.objects.get_or_create(complete=False)
-                
-                # Thêm sản phẩm vào đơn hàng
+
                 order_item, created = OrderItem.objects.get_or_create(order=order, product=product)
 
                 if action == 'add':
@@ -158,7 +155,6 @@ def add_to_cart(request):
 
                 order_item.save()
 
-                # Sau khi thêm vào giỏ hàng thành công, chuyển hướng đến trang giỏ hàng
                 return redirect('cart')
 
             except Product.DoesNotExist:
@@ -173,23 +169,16 @@ def process_payment(request):
 
     if not order:
         messages.error(request, 'Không tìm thấy đơn hàng cần thanh toán.')
-        return redirect('cart')  # Hoặc trang khác mà bạn muốn chuyển hướng đến
-
+        return redirect('cart') 
     if request.method == 'POST':
         card_name = request.POST.get('cardName')
         card_number = request.POST.get('cardNumber')
         expiry_date = request.POST.get('expiryDate')
         cvv = request.POST.get('cvv')
 
-        # Giả lập quá trình xử lý thanh toán
-        # Trong thực tế, bạn sẽ tích hợp với cổng thanh toán tại đây
-        # Ví dụ: Stripe, PayPal, etc.
-
-        # Giả lập thanh toán thành công
-        payment_status = 'completed'  # Hoặc 'pending', 'failed', tùy theo kết quả thực tế
+        payment_status = 'completed'  
 
         if payment_status == 'completed':
-            # Cập nhật đơn hàng và tạo bản ghi thanh toán
             order.complete = True
             order.save()
 
@@ -199,11 +188,10 @@ def process_payment(request):
                 status=payment_status
             )
 
-            # Thông báo thành công và chuyển hướng đến trang xác nhận thanh toán
             messages.success(request, 'Thanh toán thành công!')
             return redirect('payment_confirmation')
         else:
-            # Thông báo lỗi nếu thanh toán thất bại
+        
             messages.error(request, 'Thanh toán thất bại. Vui lòng thử lại.')
 
     context = {
@@ -214,19 +202,20 @@ def process_payment(request):
 
 def process_shipping(request):
     if request.method == 'POST':
-        # Lấy thông tin khách hàng từ request.user.customer
         customer = request.user.customer
-        
-        # Tạo hoặc lấy đơn hàng hiện tại cho khách hàng
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         
-        # Lấy thông tin địa chỉ giao hàng từ POST data
+        name = request.POST.get('name')
+        email = request.POST.get('email')
         address = request.POST.get('address')
         city = request.POST.get('city')
         state = request.POST.get('state')
         mobile = request.POST.get('mobile')
 
-        # Tạo hoặc cập nhật địa chỉ giao hàng
+        customer.name = name
+        customer.email = email
+        customer.save()
+
         shipping_address, created = ShippingAddress.objects.get_or_create(
             order=order,
             defaults={
@@ -237,7 +226,6 @@ def process_shipping(request):
             }
         )
         
-        # Nếu địa chỉ giao hàng đã tồn tại, cập nhật lại thông tin
         if not created:
             shipping_address.address = address
             shipping_address.city = city
@@ -252,14 +240,22 @@ def process_shipping(request):
     return redirect('checkout')
 
 
-def payment_confirmation(request):
-    customer = request.user.customer
-    order = Order.objects.filter(customer=customer, complete=True).last()
+def payment_confirmation(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    customer = order.customer
+    try:
+        payment = order.payment
+    except Payment.DoesNotExist:
+        payment = None
+    shipping_address = order.shipping_address if hasattr(order, 'shipping_address') else None
     items = order.order_items.all()
 
     context = {
-        'customer': customer,
         'order': order,
-        'items': items
+        'customer': customer,
+        'payment': payment,
+        'shipping_address': shipping_address,
+        'items': items,
     }
+
     return render(request, 'app/payment_confirmation.html', context)
